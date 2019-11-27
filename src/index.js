@@ -5,15 +5,19 @@ const getEnd = apiEndpoint + "pups/"
 
 const pupBar = document.querySelector("#dog-bar")
 const pupShow = document.querySelector("#dog-info")
+const btnFilter = document.querySelector("#good-dog-filter")
+btnFilter.className = "off"
+
+btnFilter.addEventListener("click", () => filterPups(btnFilter))
 
 const controller = () => {
-  getData()
-}
+  getData().then(el => el.forEach(renderPup)
+  )}
 
 const getData = async () => {
   const data = await fetch(getEnd)
   let array = await data.json()
-  array.forEach(renderPup)
+  return array
 }
 
 const renderPup = (pup) => {
@@ -63,10 +67,33 @@ const toggleGoodBoiness = async (pup, button) => {
     body: JSON.stringify(pup)
   }
 
-  let patch = await fetch(getEnd + pup.id, configObj)
-  let resp = await patch.json()
-  checkToggle(resp, button)
+  let resp = await fetch(getEnd + pup.id, configObj)
+  let json = await resp.json()
+  checkToggle(json, button)
 
+}
+
+const filterPups = (button) => {
+  if (button.className === "off") {
+    button.className = "on"
+    button.textContent = "Filter good dogs ON"
+
+    while (pupBar.firstChild) {
+      pupBar.removeChild(pupBar.firstChild)
+    }
+
+    getData()
+    .then(array => array.filter(el => !el.isGoodDog))
+    .then(el => el.forEach(renderPup))
+  } else {
+    while (pupBar.firstChild) {
+      pupBar.removeChild(pupBar.firstChild)
+    }
+    button.textContent = "Filter good dogs OFF"
+    button.className = "off"
+    getData()
+    .then(el => el.forEach(renderPup))
+  }
 }
 
 controller()
