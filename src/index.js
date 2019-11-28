@@ -36,12 +36,10 @@ const activateGoodDogFilter = () => {
       goodDogFilter.classList.remove("active");
       goodDogFilter.innerText = "Filter good dogs: OFF";
       displayAllDogs();
-      console.log("toggled OFF");
     } else {
       goodDogFilter.className = "active";
       goodDogFilter.innerText = "Filter good dogs: ON";
       displayGoodDogs();
-      console.log("toggled ON");
     }
   });
 };
