@@ -15,8 +15,8 @@
 }
 
 #dog-bar {
-  height: 15vh;
-  background: skyblue;
+  height: 25vh;
+  background: rgb(217, 219, 71);
   display: flex;
   justify-content: space-around;
   align-items: center;
