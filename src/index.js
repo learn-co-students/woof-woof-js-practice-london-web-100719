@@ -95,9 +95,7 @@ const showDogInfo = (dog, span) => {
   h2.innerText = dog.name;
 
   const goodButton = document.createElement("button");
-  dog.isGoodDog
-    ? (goodButton.innerText = "Good Dog!")
-    : (goodButton.innerText = "Bad Dog!");
+  goodButton.innerText = dog.isGoodDog ? "Good Dog!" : "Bad Dog!";
   goodButton.addEventListener("click", () =>
     toggleGoodBad(dog, goodButton, span)
   );
